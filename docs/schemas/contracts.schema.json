@@ -1,0 +1,1823 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:shortvideo-agent:contracts:1.0",
+  "title": "ShortVideo-Agent design contracts",
+  "description": "Protocol 1.0 design-contract baseline. Runtime implementation and verified scope are documented in docs/04-acceptance.md.",
+  "anyOf": [
+    {
+      "$ref": "#/$defs/UserRequest"
+    },
+    {
+      "$ref": "#/$defs/ScriptDraft"
+    },
+    {
+      "$ref": "#/$defs/ToolCall"
+    },
+    {
+      "$ref": "#/$defs/ToolResult"
+    },
+    {
+      "$ref": "#/$defs/AgentTrace"
+    },
+    {
+      "$ref": "#/$defs/SyntheticMaterials"
+    },
+    {
+      "$ref": "#/$defs/SyntheticRuleSet"
+    }
+  ],
+  "$defs": {
+    "UserRequest": {
+      "type": "object",
+      "properties": {
+        "schema_version": {
+          "const": "1.0"
+        },
+        "request_id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]{0,63}$"
+        },
+        "topic": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 300
+        },
+        "audience": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 300
+        },
+        "platform": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 80
+        },
+        "target_duration_seconds": {
+          "type": "integer",
+          "minimum": 5,
+          "maximum": 180
+        },
+        "style": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 300
+        },
+        "product_id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]{0,63}$"
+        },
+        "language": {
+          "const": "zh-CN"
+        },
+        "brand_rule_set_id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]{0,63}$"
+        }
+      },
+      "required": [
+        "schema_version",
+        "request_id",
+        "topic",
+        "audience",
+        "platform",
+        "target_duration_seconds",
+        "style",
+        "product_id",
+        "language"
+      ],
+      "additionalProperties": false
+    },
+    "MaterialReference": {
+      "type": "object",
+      "properties": {
+        "dataset_id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]{0,63}$"
+        },
+        "material_id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]{0,63}$"
+        },
+        "fact_id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]{0,63}$"
+        },
+        "evidence_quote": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 1000
+        },
+        "synthetic": {
+          "const": true
+        }
+      },
+      "required": [
+        "dataset_id",
+        "material_id",
+        "fact_id",
+        "evidence_quote",
+        "synthetic"
+      ],
+      "additionalProperties": false
+    },
+    "Claim": {
+      "type": "object",
+      "properties": {
+        "claim_id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]{0,63}$"
+        },
+        "scope": {
+          "enum": [
+            "title",
+            "concept",
+            "visual",
+            "narration",
+            "subtitle"
+          ]
+        },
+        "scene_id": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]{0,63}$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "surface_text": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 1000
+        },
+        "text": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 1000
+        },
+        "references": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/MaterialReference"
+          },
+          "minItems": 0,
+          "maxItems": 5,
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "claim_id",
+        "scope",
+        "scene_id",
+        "surface_text",
+        "text",
+        "references"
+      ],
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "scope": {
+                "enum": [
+                  "title",
+                  "concept"
+                ]
+              }
+            },
+            "required": [
+              "scope"
+            ]
+          },
+          "then": {
+            "properties": {
+              "scene_id": {
+                "type": "null"
+              }
+            }
+          },
+          "else": {
+            "properties": {
+              "scene_id": {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]{0,63}$"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "Scene": {
+      "type": "object",
+      "properties": {
+        "scene_id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]{0,63}$"
+        },
+        "order": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 30
+        },
+        "visual": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2000
+        },
+        "narration": {
+          "type": "string",
+          "maxLength": 3000
+        },
+        "subtitle": {
+          "type": "string",
+          "maxLength": 3000
+        },
+        "visual_hold_seconds": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 180
+        },
+        "estimated_duration_seconds": {
+          "anyOf": [
+            {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 10000
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "claim_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]{0,63}$"
+          },
+          "minItems": 0,
+          "maxItems": 200,
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "scene_id",
+        "order",
+        "visual",
+        "narration",
+        "subtitle",
+        "visual_hold_seconds",
+        "estimated_duration_seconds",
+        "claim_ids"
+      ],
+      "additionalProperties": false
+    },
+    "ScriptDraft": {
+      "type": "object",
+      "properties": {
+        "schema_version": {
+          "const": "1.0"
+        },
+        "draft_id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]{0,63}$"
+        },
+        "request_id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]{0,63}$"
+        },
+        "product_id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]{0,63}$"
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 300
+        },
+        "concept": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2000
+        },
+        "scenes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Scene"
+          },
+          "minItems": 1,
+          "maxItems": 30
+        },
+        "claims": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Claim"
+          },
+          "minItems": 0,
+          "maxItems": 200
+        }
+      },
+      "required": [
+        "schema_version",
+        "draft_id",
+        "request_id",
+        "product_id",
+        "title",
+        "concept",
+        "scenes",
+        "claims"
+      ],
+      "additionalProperties": false
+    },
+    "MaterialFact": {
+      "type": "object",
+      "properties": {
+        "fact_id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]{0,63}$"
+        },
+        "text": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 1000
+        }
+      },
+      "required": [
+        "fact_id",
+        "text"
+      ],
+      "additionalProperties": false
+    },
+    "Material": {
+      "type": "object",
+      "properties": {
+        "material_id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]{0,63}$"
+        },
+        "product_id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]{0,63}$"
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 300
+        },
+        "summary": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2000
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 80
+          },
+          "minItems": 0,
+          "maxItems": 30,
+          "uniqueItems": true
+        },
+        "applicable_platforms": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 80
+          },
+          "minItems": 0,
+          "maxItems": 30,
+          "uniqueItems": true
+        },
+        "limitations": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 1000
+          },
+          "minItems": 0,
+          "maxItems": 30
+        },
+        "facts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/MaterialFact"
+          },
+          "minItems": 1,
+          "maxItems": 50
+        },
+        "synthetic": {
+          "const": true
+        }
+      },
+      "required": [
+        "material_id",
+        "product_id",
+        "title",
+        "summary",
+        "tags",
+        "applicable_platforms",
+        "limitations",
+        "facts",
+        "synthetic"
+      ],
+      "additionalProperties": false
+    },
+    "SyntheticMaterials": {
+      "type": "object",
+      "properties": {
+        "schema_version": {
+          "const": "1.0"
+        },
+        "dataset_id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]{0,63}$"
+        },
+        "synthetic": {
+          "const": true
+        },
+        "notice": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 1000
+        },
+        "materials": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Material"
+          },
+          "minItems": 1,
+          "maxItems": 500
+        }
+      },
+      "required": [
+        "schema_version",
+        "dataset_id",
+        "synthetic",
+        "notice",
+        "materials"
+      ],
+      "additionalProperties": false
+    },
+    "BrandRule": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "rule_id": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]{0,63}$"
+            },
+            "severity": {
+              "enum": [
+                "error",
+                "review",
+                "warning"
+              ]
+            },
+            "message": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 1000
+            },
+            "type": {
+              "const": "forbidden_phrase"
+            },
+            "phrases": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 300
+              },
+              "minItems": 1,
+              "maxItems": 50,
+              "uniqueItems": true
+            },
+            "scopes": {
+              "type": "array",
+              "items": {
+                "enum": [
+                  "title",
+                  "concept",
+                  "visual",
+                  "narration",
+                  "subtitle"
+                ]
+              },
+              "minItems": 1,
+              "maxItems": 5,
+              "uniqueItems": true
+            }
+          },
+          "required": [
+            "rule_id",
+            "severity",
+            "message",
+            "type",
+            "phrases",
+            "scopes"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "rule_id": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]{0,63}$"
+            },
+            "severity": {
+              "enum": [
+                "error",
+                "review",
+                "warning"
+              ]
+            },
+            "message": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 1000
+            },
+            "type": {
+              "const": "required_phrase"
+            },
+            "phrases": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 300
+              },
+              "minItems": 1,
+              "maxItems": 50,
+              "uniqueItems": true
+            },
+            "scopes": {
+              "type": "array",
+              "items": {
+                "enum": [
+                  "title",
+                  "concept",
+                  "visual",
+                  "narration",
+                  "subtitle"
+                ]
+              },
+              "minItems": 1,
+              "maxItems": 5,
+              "uniqueItems": true
+            }
+          },
+          "required": [
+            "rule_id",
+            "severity",
+            "message",
+            "type",
+            "phrases",
+            "scopes"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "rule_id": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]{0,63}$"
+            },
+            "severity": {
+              "const": "error"
+            },
+            "message": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 1000
+            },
+            "type": {
+              "const": "claim_references"
+            }
+          },
+          "required": [
+            "rule_id",
+            "severity",
+            "message",
+            "type"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "SyntheticRuleSet": {
+      "type": "object",
+      "properties": {
+        "schema_version": {
+          "const": "1.0"
+        },
+        "dataset_id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]{0,63}$"
+        },
+        "rule_set_id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]{0,63}$"
+        },
+        "product_id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]{0,63}$"
+        },
+        "synthetic": {
+          "const": true
+        },
+        "notice": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 1000
+        },
+        "rules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/BrandRule"
+          },
+          "minItems": 1,
+          "maxItems": 200,
+          "contains": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "const": "claim_references"
+              }
+            },
+            "required": [
+              "type"
+            ]
+          }
+        }
+      },
+      "required": [
+        "schema_version",
+        "dataset_id",
+        "rule_set_id",
+        "product_id",
+        "synthetic",
+        "notice",
+        "rules"
+      ],
+      "additionalProperties": false
+    },
+    "SearchMaterialsArgs": {
+      "type": "object",
+      "properties": {
+        "query": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 300
+        },
+        "product_id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]{0,63}$"
+        },
+        "top_k": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 10,
+          "default": 3
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 80
+          },
+          "minItems": 0,
+          "maxItems": 30,
+          "uniqueItems": true,
+          "default": []
+        }
+      },
+      "required": [
+        "query",
+        "product_id"
+      ],
+      "additionalProperties": false
+    },
+    "EstimateDurationArgs": {
+      "type": "object",
+      "properties": {
+        "draft": {
+          "$ref": "#/$defs/ScriptDraft"
+        },
+        "target_duration_seconds": {
+          "type": "integer",
+          "minimum": 5,
+          "maximum": 180
+        },
+        "chars_per_second": {
+          "type": "number",
+          "minimum": 1,
+          "maximum": 10,
+          "default": 4.5
+        },
+        "transition_seconds": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 5,
+          "default": 0.5
+        },
+        "tolerance_ratio": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 0.5,
+          "default": 0.1
+        }
+      },
+      "required": [
+        "draft",
+        "target_duration_seconds"
+      ],
+      "additionalProperties": false
+    },
+    "CheckRulesArgs": {
+      "type": "object",
+      "properties": {
+        "draft": {
+          "$ref": "#/$defs/ScriptDraft"
+        },
+        "rule_set_id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]{0,63}$"
+        }
+      },
+      "required": [
+        "draft",
+        "rule_set_id"
+      ],
+      "additionalProperties": false
+    },
+    "ToolCall": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "call_id": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 256
+            },
+            "tool": {
+              "const": "search_materials"
+            },
+            "arguments": {
+              "$ref": "#/$defs/SearchMaterialsArgs"
+            }
+          },
+          "required": [
+            "call_id",
+            "tool",
+            "arguments"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "call_id": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 256
+            },
+            "tool": {
+              "const": "estimate_duration"
+            },
+            "arguments": {
+              "$ref": "#/$defs/EstimateDurationArgs"
+            }
+          },
+          "required": [
+            "call_id",
+            "tool",
+            "arguments"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "call_id": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 256
+            },
+            "tool": {
+              "const": "check_rules"
+            },
+            "arguments": {
+              "$ref": "#/$defs/CheckRulesArgs"
+            }
+          },
+          "required": [
+            "call_id",
+            "tool",
+            "arguments"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "SearchMaterialsData": {
+      "type": "object",
+      "properties": {
+        "dataset_id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]{0,63}$"
+        },
+        "query": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 300
+        },
+        "matches": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "material": {
+                "$ref": "#/$defs/Material"
+              },
+              "score": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              }
+            },
+            "required": [
+              "material",
+              "score"
+            ],
+            "additionalProperties": false
+          },
+          "minItems": 0,
+          "maxItems": 10
+        },
+        "warnings": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 1000
+          },
+          "minItems": 0,
+          "maxItems": 200
+        }
+      },
+      "required": [
+        "dataset_id",
+        "query",
+        "matches",
+        "warnings"
+      ],
+      "additionalProperties": false
+    },
+    "SceneDuration": {
+      "type": "object",
+      "properties": {
+        "scene_id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]{0,63}$"
+        },
+        "char_count": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 3000
+        },
+        "speech_seconds": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 10000
+        },
+        "effective_seconds": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 10000
+        }
+      },
+      "required": [
+        "scene_id",
+        "char_count",
+        "speech_seconds",
+        "effective_seconds"
+      ],
+      "additionalProperties": false
+    },
+    "EstimateDurationData": {
+      "type": "object",
+      "properties": {
+        "draft_id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]{0,63}$"
+        },
+        "target_duration_seconds": {
+          "type": "integer",
+          "minimum": 5,
+          "maximum": 180
+        },
+        "chars_per_second": {
+          "type": "number",
+          "minimum": 1,
+          "maximum": 10
+        },
+        "transition_seconds": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 5
+        },
+        "tolerance_ratio": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 0.5
+        },
+        "scenes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/SceneDuration"
+          },
+          "minItems": 1,
+          "maxItems": 30
+        },
+        "total_seconds": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 10000
+        },
+        "delta_seconds": {
+          "type": "number",
+          "minimum": -180,
+          "maximum": 10000
+        },
+        "status": {
+          "enum": [
+            "too_short",
+            "within_tolerance",
+            "too_long"
+          ]
+        },
+        "warnings": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 1000
+          },
+          "minItems": 1,
+          "maxItems": 200
+        }
+      },
+      "required": [
+        "draft_id",
+        "target_duration_seconds",
+        "chars_per_second",
+        "transition_seconds",
+        "tolerance_ratio",
+        "scenes",
+        "total_seconds",
+        "delta_seconds",
+        "status",
+        "warnings"
+      ],
+      "additionalProperties": false
+    },
+    "RuleFinding": {
+      "type": "object",
+      "properties": {
+        "finding_id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]{0,63}$"
+        },
+        "rule_id": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]{0,63}$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "code": {
+          "enum": [
+            "FORBIDDEN_PHRASE",
+            "REQUIRED_PHRASE_MISSING",
+            "MISSING_REFERENCE",
+            "UNKNOWN_REFERENCE",
+            "FACT_MISMATCH",
+            "SCOPE_MISMATCH",
+            "CLAIM_COVERAGE_REVIEW",
+            "INVALID_LINK"
+          ]
+        },
+        "severity": {
+          "enum": [
+            "error",
+            "review",
+            "warning"
+          ]
+        },
+        "scope": {
+          "enum": [
+            "document",
+            "title",
+            "concept",
+            "visual",
+            "narration",
+            "subtitle"
+          ]
+        },
+        "scene_id": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]{0,63}$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "claim_id": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]{0,63}$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "message": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 1000
+        }
+      },
+      "required": [
+        "finding_id",
+        "rule_id",
+        "code",
+        "severity",
+        "scope",
+        "scene_id",
+        "claim_id",
+        "message"
+      ],
+      "additionalProperties": false
+    },
+    "CheckRulesData": {
+      "type": "object",
+      "properties": {
+        "draft_id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]{0,63}$"
+        },
+        "rule_set_id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]{0,63}$"
+        },
+        "status": {
+          "enum": [
+            "passed",
+            "failed",
+            "needs_review"
+          ]
+        },
+        "passed": {
+          "type": "boolean"
+        },
+        "findings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/RuleFinding"
+          },
+          "minItems": 0,
+          "maxItems": 1000
+        },
+        "checked_claim_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]{0,63}$"
+          },
+          "minItems": 0,
+          "maxItems": 200,
+          "uniqueItems": true
+        },
+        "warnings": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 1000
+          },
+          "minItems": 0,
+          "maxItems": 200
+        }
+      },
+      "required": [
+        "draft_id",
+        "rule_set_id",
+        "status",
+        "passed",
+        "findings",
+        "checked_claim_ids",
+        "warnings"
+      ],
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "status": {
+                "const": "passed"
+              }
+            },
+            "required": [
+              "status"
+            ]
+          },
+          "then": {
+            "properties": {
+              "passed": {
+                "const": true
+              },
+              "findings": {
+                "not": {
+                  "contains": {
+                    "type": "object",
+                    "properties": {
+                      "severity": {
+                        "enum": [
+                          "error",
+                          "review"
+                        ]
+                      }
+                    },
+                    "required": [
+                      "severity"
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "else": {
+            "properties": {
+              "passed": {
+                "const": false
+              }
+            }
+          }
+        }
+      ]
+    },
+    "ToolError": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "enum": [
+            "INVALID_ARGUMENT",
+            "UNKNOWN_TOOL",
+            "DATA_NOT_FOUND",
+            "DATA_INVALID",
+            "TIMEOUT",
+            "IO_ERROR",
+            "INTERNAL_ERROR"
+          ]
+        },
+        "message": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 1000
+        },
+        "retryable": {
+          "type": "boolean"
+        },
+        "field_errors": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "path": {
+                "type": "string",
+                "maxLength": 300
+              },
+              "message": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 1000
+              }
+            },
+            "required": [
+              "path",
+              "message"
+            ],
+            "additionalProperties": false
+          },
+          "minItems": 0,
+          "maxItems": 200
+        }
+      },
+      "required": [
+        "code",
+        "message",
+        "retryable",
+        "field_errors"
+      ],
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "code": {
+                "enum": [
+                  "INVALID_ARGUMENT",
+                  "UNKNOWN_TOOL",
+                  "DATA_NOT_FOUND",
+                  "DATA_INVALID",
+                  "INTERNAL_ERROR"
+                ]
+              }
+            },
+            "required": [
+              "code"
+            ]
+          },
+          "then": {
+            "properties": {
+              "retryable": {
+                "const": false
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "code": {
+                "const": "TIMEOUT"
+              }
+            },
+            "required": [
+              "code"
+            ]
+          },
+          "then": {
+            "properties": {
+              "retryable": {
+                "const": true
+              }
+            }
+          }
+        }
+      ]
+    },
+    "ToolResult": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "schema_version": {
+              "const": "1.0"
+            },
+            "call_id": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 256
+            },
+            "elapsed_ms": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 2147483647
+            },
+            "tool": {
+              "const": "search_materials"
+            },
+            "ok": {
+              "const": true
+            },
+            "data": {
+              "$ref": "#/$defs/SearchMaterialsData"
+            },
+            "error": {
+              "type": "null"
+            }
+          },
+          "required": [
+            "schema_version",
+            "call_id",
+            "elapsed_ms",
+            "tool",
+            "ok",
+            "data",
+            "error"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "schema_version": {
+              "const": "1.0"
+            },
+            "call_id": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 256
+            },
+            "elapsed_ms": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 2147483647
+            },
+            "tool": {
+              "const": "estimate_duration"
+            },
+            "ok": {
+              "const": true
+            },
+            "data": {
+              "$ref": "#/$defs/EstimateDurationData"
+            },
+            "error": {
+              "type": "null"
+            }
+          },
+          "required": [
+            "schema_version",
+            "call_id",
+            "elapsed_ms",
+            "tool",
+            "ok",
+            "data",
+            "error"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "schema_version": {
+              "const": "1.0"
+            },
+            "call_id": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 256
+            },
+            "elapsed_ms": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 2147483647
+            },
+            "tool": {
+              "const": "check_rules"
+            },
+            "ok": {
+              "const": true
+            },
+            "data": {
+              "$ref": "#/$defs/CheckRulesData"
+            },
+            "error": {
+              "type": "null"
+            }
+          },
+          "required": [
+            "schema_version",
+            "call_id",
+            "elapsed_ms",
+            "tool",
+            "ok",
+            "data",
+            "error"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "schema_version": {
+              "const": "1.0"
+            },
+            "call_id": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 256
+            },
+            "elapsed_ms": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 2147483647
+            },
+            "tool": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 256
+            },
+            "ok": {
+              "const": false
+            },
+            "data": {
+              "type": "null"
+            },
+            "error": {
+              "$ref": "#/$defs/ToolError"
+            }
+          },
+          "required": [
+            "schema_version",
+            "call_id",
+            "elapsed_ms",
+            "tool",
+            "ok",
+            "data",
+            "error"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "TraceError": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 80
+        },
+        "message": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 1000
+        },
+        "retryable": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "code",
+        "message",
+        "retryable"
+      ],
+      "additionalProperties": false
+    },
+    "TraceEvent": {
+      "type": "object",
+      "properties": {
+        "seq": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 10000
+        },
+        "at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "kind": {
+          "enum": [
+            "llm_request",
+            "llm_response",
+            "tool_call",
+            "tool_result",
+            "draft",
+            "decision",
+            "error",
+            "finish"
+          ]
+        },
+        "summary": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2000
+        },
+        "model_request_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "tool_call": {
+          "$ref": "#/$defs/ToolCall"
+        },
+        "tool_result": {
+          "$ref": "#/$defs/ToolResult"
+        },
+        "draft": {
+          "$ref": "#/$defs/ScriptDraft"
+        },
+        "error": {
+          "$ref": "#/$defs/TraceError"
+        }
+      },
+      "required": [
+        "seq",
+        "at",
+        "kind",
+        "summary"
+      ],
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "tool_call"
+              }
+            },
+            "required": [
+              "kind"
+            ]
+          },
+          "then": {
+            "required": [
+              "tool_call"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "tool_result"
+              }
+            },
+            "required": [
+              "kind"
+            ]
+          },
+          "then": {
+            "required": [
+              "tool_result"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "draft"
+              }
+            },
+            "required": [
+              "kind"
+            ]
+          },
+          "then": {
+            "required": [
+              "draft"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "error"
+              }
+            },
+            "required": [
+              "kind"
+            ]
+          },
+          "then": {
+            "required": [
+              "error"
+            ]
+          }
+        }
+      ]
+    },
+    "AgentTrace": {
+      "type": "object",
+      "properties": {
+        "schema_version": {
+          "const": "1.0"
+        },
+        "run_id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]{0,63}$"
+        },
+        "request_id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]{0,63}$"
+        },
+        "model": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "synthetic": {
+          "const": true
+        },
+        "status": {
+          "enum": [
+            "running",
+            "completed",
+            "needs_input",
+            "failed",
+            "limit_reached"
+          ]
+        },
+        "started_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "ended_at": {
+          "anyOf": [
+            {
+              "type": "string",
+              "format": "date-time"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "budget": {
+          "type": "object",
+          "properties": {
+            "max_model_requests": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100
+            },
+            "max_tool_calls": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100
+            },
+            "max_elapsed_seconds": {
+              "type": "number",
+              "minimum": 1,
+              "maximum": 3600
+            },
+            "max_retries_per_error": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 10
+            }
+          },
+          "required": [
+            "max_model_requests",
+            "max_tool_calls",
+            "max_elapsed_seconds",
+            "max_retries_per_error"
+          ],
+          "additionalProperties": false
+        },
+        "usage": {
+          "type": "object",
+          "properties": {
+            "model_requests": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 100
+            },
+            "tool_calls": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 100
+            },
+            "elapsed_seconds": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 86400
+            }
+          },
+          "required": [
+            "model_requests",
+            "tool_calls",
+            "elapsed_seconds"
+          ],
+          "additionalProperties": false
+        },
+        "final_draft_id": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]{0,63}$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "stop_reason": {
+          "anyOf": [
+            {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 1000
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "events": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/TraceEvent"
+          },
+          "minItems": 1,
+          "maxItems": 10000
+        }
+      },
+      "required": [
+        "schema_version",
+        "run_id",
+        "request_id",
+        "model",
+        "synthetic",
+        "status",
+        "started_at",
+        "ended_at",
+        "budget",
+        "usage",
+        "final_draft_id",
+        "stop_reason",
+        "events"
+      ],
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "status": {
+                "const": "running"
+              }
+            },
+            "required": [
+              "status"
+            ]
+          },
+          "then": {
+            "properties": {
+              "ended_at": {
+                "type": "null"
+              },
+              "stop_reason": {
+                "type": "null"
+              }
+            }
+          },
+          "else": {
+            "properties": {
+              "ended_at": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "stop_reason": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 1000
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "status": {
+                "const": "completed"
+              }
+            },
+            "required": [
+              "status"
+            ]
+          },
+          "then": {
+            "properties": {
+              "final_draft_id": {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]{0,63}$"
+              }
+            }
+          },
+          "else": {
+            "properties": {
+              "final_draft_id": {
+                "type": "null"
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

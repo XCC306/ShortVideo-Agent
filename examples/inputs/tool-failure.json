@@ -1,0 +1,11 @@
+{
+  "schema_version": "1.0",
+  "request_id": "demo-tool-failure-01",
+  "topic": "介绍演示剪辑器的字幕功能",
+  "audience": "短视频创作者",
+  "platform": "抖音",
+  "target_duration_seconds": 15,
+  "style": "清楚、克制",
+  "product_id": "demo-editor",
+  "language": "zh-CN"
+}

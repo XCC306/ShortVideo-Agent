@@ -1,0 +1,30 @@
+{
+  "schema_version": "1.0",
+  "dataset_id": "demo-v1",
+  "synthetic": true,
+  "notice": "仅用于演示测试，不代表小影科技或任何真实产品能力。",
+  "materials": [
+    {
+      "material_id": "P01", "product_id": "demo-editor", "title": "演示剪辑器·字幕资料",
+      "summary": "合成的字幕功能说明。", "tags": ["字幕", "剪辑"],
+      "applicable_platforms": [], "limitations": [],
+      "facts": [{"fact_id": "F01", "text": "演示剪辑器支持字幕功能。"},
+                {"fact_id": "F02", "text": "演示剪辑器可以调整字幕样式。"}],
+      "synthetic": true
+    },
+    {
+      "material_id": "P02", "product_id": "demo-editor", "title": "演示剪辑器·片段资料",
+      "summary": "合成的片段排序说明。", "tags": ["片段", "排序"],
+      "applicable_platforms": [], "limitations": [],
+      "facts": [{"fact_id": "F01", "text": "演示剪辑器支持调整片段顺序。"}],
+      "synthetic": true
+    },
+    {
+      "material_id": "P03", "product_id": "demo-editor", "title": "演示剪辑器·导出资料",
+      "summary": "合成的导出说明。", "tags": ["导出", "分享"],
+      "applicable_platforms": [], "limitations": ["导出效果取决于用户提供的素材；不得承诺画质或平台审核结果。"],
+      "facts": [{"fact_id": "F01", "text": "演示剪辑器支持导出视频文件。"}],
+      "synthetic": true
+    }
+  ]
+}

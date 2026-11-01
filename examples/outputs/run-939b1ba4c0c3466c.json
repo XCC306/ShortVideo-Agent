@@ -1,0 +1,95 @@
+{
+  "run_id": "run-939b1ba4c0c3466c",
+  "draft": {
+    "schema_version": "1.0",
+    "draft_id": "draft-003",
+    "request_id": "demo-request-01",
+    "product_id": "demo-editor",
+    "title": "旅行片段字幕整理",
+    "concept": "用字幕快速整理旅行视频片段，轻快清晰。",
+    "scenes": [
+      {
+        "scene_id": "s1",
+        "order": 1,
+        "visual": "旅行风景空镜（海滩/山景）",
+        "narration": "演示剪辑器支持字幕功能。",
+        "subtitle": "演示剪辑器支持字幕功能。",
+        "visual_hold_seconds": 15.0,
+        "estimated_duration_seconds": null,
+        "claim_ids": [
+          "c1",
+          "c2"
+        ]
+      }
+    ],
+    "claims": [
+      {
+        "claim_id": "c1",
+        "scope": "narration",
+        "scene_id": "s1",
+        "surface_text": "演示剪辑器支持字幕功能。",
+        "text": "演示剪辑器支持字幕功能。",
+        "references": [
+          {
+            "dataset_id": "demo-v1",
+            "material_id": "P01",
+            "fact_id": "F01",
+            "evidence_quote": "演示剪辑器支持字幕功能。",
+            "synthetic": true
+          }
+        ]
+      },
+      {
+        "claim_id": "c2",
+        "scope": "subtitle",
+        "scene_id": "s1",
+        "surface_text": "演示剪辑器支持字幕功能。",
+        "text": "演示剪辑器支持字幕功能。",
+        "references": [
+          {
+            "dataset_id": "demo-v1",
+            "material_id": "P01",
+            "fact_id": "F01",
+            "evidence_quote": "演示剪辑器支持字幕功能。",
+            "synthetic": true
+          }
+        ]
+      }
+    ]
+  },
+  "duration_check": {
+    "draft_id": "draft-003",
+    "target_duration_seconds": 15,
+    "chars_per_second": 5.0,
+    "transition_seconds": 0.5,
+    "tolerance_ratio": 0.1,
+    "scenes": [
+      {
+        "scene_id": "s1",
+        "char_count": 11,
+        "speech_seconds": 2.2,
+        "effective_seconds": 15.0
+      }
+    ],
+    "total_seconds": 15.0,
+    "delta_seconds": 0.0,
+    "status": "within_tolerance",
+    "warnings": [
+      "字符数和画面停留时长仅为启发式估算，不等于实测配音时长；数字念法、语气和停顿未精确建模。"
+    ]
+  },
+  "rule_check": {
+    "draft_id": "draft-003",
+    "rule_set_id": "demo-brand-v1",
+    "status": "passed",
+    "passed": true,
+    "findings": [],
+    "checked_claim_ids": [
+      "c1",
+      "c2"
+    ],
+    "warnings": [
+      "自动检查只覆盖字面规则与保守原子事实；无法证明任意自然语言断言均被识别。"
+    ]
+  }
+}

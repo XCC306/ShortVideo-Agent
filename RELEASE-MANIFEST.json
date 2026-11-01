@@ -1,0 +1,323 @@
+{
+  "schema_version": "1.0",
+  "project": "ShortVideo-Agent",
+  "prepared_date": "2026-11-01",
+  "timezone": "Asia/Shanghai",
+  "publication_target": "XCC306/ShortVideo-Agent",
+  "requested_visibility": "public",
+  "python": "3.11.15",
+  "verification": {
+    "offline_tests": "...............                                                          [100%]\n15 passed in 4.32s",
+    "pip_check": "No broken requirements found.",
+    "fresh_qwen_requests_in_submission_stage": 0,
+    "required_document_names_present": true,
+    "three_evidence_groups_present": true,
+    "links_schema_and_credential_scan_passed": true
+  },
+  "evidence_modes": {
+    "normal": "real qwen-plus",
+    "insufficient_materials": "real qwen-plus",
+    "runtime_tool_failure": "executed offline fault injection with controlled model replies"
+  },
+  "code_change_since_real_runs": "Trace logging now preserves failed ToolResult. Decision and completion gates unchanged; new failure regression passed offline.",
+  "trace_preservation": "Original JSON values preserved; text line endings normalized to LF for Git.",
+  "installed_packages": [
+    {
+      "name": "annotated-types",
+      "version": "0.8.0"
+    },
+    {
+      "name": "attrs",
+      "version": "26.1.0"
+    },
+    {
+      "name": "colorama",
+      "version": "0.4.6"
+    },
+    {
+      "name": "iniconfig",
+      "version": "2.3.1"
+    },
+    {
+      "name": "jsonschema",
+      "version": "4.26.0"
+    },
+    {
+      "name": "jsonschema-specifications",
+      "version": "2025.9.1"
+    },
+    {
+      "name": "packaging",
+      "version": "26.3"
+    },
+    {
+      "name": "pip",
+      "version": "24.0"
+    },
+    {
+      "name": "pluggy",
+      "version": "1.7.0"
+    },
+    {
+      "name": "pydantic",
+      "version": "2.14.2"
+    },
+    {
+      "name": "pydantic_core",
+      "version": "2.50.2"
+    },
+    {
+      "name": "Pygments",
+      "version": "2.21.0"
+    },
+    {
+      "name": "pytest",
+      "version": "9.2.0"
+    },
+    {
+      "name": "python-dotenv",
+      "version": "1.2.4"
+    },
+    {
+      "name": "referencing",
+      "version": "0.37.0"
+    },
+    {
+      "name": "rpds-py",
+      "version": "2026.9.1"
+    },
+    {
+      "name": "setuptools",
+      "version": "79.0.1"
+    },
+    {
+      "name": "typing-inspection",
+      "version": "0.4.4"
+    },
+    {
+      "name": "typing_extensions",
+      "version": "4.16.0"
+    }
+  ],
+  "excluded": [
+    ".env",
+    "environments",
+    "backups",
+    "caches",
+    "local editor configuration",
+    "local helper scripts"
+  ],
+  "manifest_hash_note": "All other public payload files are listed below; the manifest itself is excluded to avoid a circular hash.",
+  "files": [
+    {
+      "path": ".env.example",
+      "bytes": 44,
+      "sha256": "FF8580722AD6BC43EFA81E1A48391670253BA0021EA5A88AE821FA9E2A6B310D"
+    },
+    {
+      "path": ".gitattributes",
+      "bytes": 19,
+      "sha256": "D60F352D0DB1404C70AFB4BB8B2CA3FD1C610572AA40720E8A0B7BAA7885418C"
+    },
+    {
+      "path": ".gitignore",
+      "bytes": 580,
+      "sha256": "0191CA1E813893069FBCFDD6157A114DA1003C26B4D83F96CF6770BC79D44B76"
+    },
+    {
+      "path": "data/materials.json",
+      "bytes": 1440,
+      "sha256": "696DEA87BAA7E6A147634DC5E5ACD4FA99CA59FD882317562EF2F63E68464638"
+    },
+    {
+      "path": "data/rules.json",
+      "bytes": 669,
+      "sha256": "A9458C467269AAC1BA8D39CB6774F894F1A2F751285D96BE10874A08223212C7"
+    },
+    {
+      "path": "docs/01-requirements.md",
+      "bytes": 7002,
+      "sha256": "82F02C1B767851F4D7310F5413BEFB9DF9FFEE2FD82104B94D4799BE4BCB8533"
+    },
+    {
+      "path": "docs/02-solution.md",
+      "bytes": 7829,
+      "sha256": "984B938379B72AD1FB72B421A8C9C75AC54DE295E09B32EDAC2C0B2FF8E42575"
+    },
+    {
+      "path": "docs/03-data-contracts.md",
+      "bytes": 15568,
+      "sha256": "8470FADD3D1ACA3A91CAC260C1AD9A18BD7F2F191E1C1063F32C3FB9EC7161BC"
+    },
+    {
+      "path": "docs/03-evaluation.md",
+      "bytes": 6028,
+      "sha256": "5FC98C8A4F3EDA8442F6223464E9F3DDA99CB45F52B1E731ACB91DD9A65B006F"
+    },
+    {
+      "path": "docs/04-acceptance.md",
+      "bytes": 5913,
+      "sha256": "7020A653C050460166F241FBD44BE4F04F76575AE1C44B335E0532C466F11BEE"
+    },
+    {
+      "path": "docs/04-ai-usage.md",
+      "bytes": 2478,
+      "sha256": "4175974D336563B9F5CFA93C45C8F8F3942592B0300DF32AE6EA5F56185F6906"
+    },
+    {
+      "path": "docs/05-retrospective.md",
+      "bytes": 2591,
+      "sha256": "5D3738418050D2E646F7E804BDCDB720870FE8B4C42C89DE9DC4E543DC2234E7"
+    },
+    {
+      "path": "docs/schemas/contracts.schema.json",
+      "bytes": 41795,
+      "sha256": "3A9FE3A59ADC2E81CF804690676CB619EE2902AC8D3AB4303638901A0BA2EDC9"
+    },
+    {
+      "path": "examples/inputs/missing-duration.json",
+      "bytes": 224,
+      "sha256": "40C846DC5259FAF67F7D755A648F0EF057B8FA402EDDDC8141E191141566D1CC"
+    },
+    {
+      "path": "examples/inputs/normal.json",
+      "bytes": 320,
+      "sha256": "939CE81179285422BAA8944957BE77A4803B17825AA66CAB783A3D720AB00DF0"
+    },
+    {
+      "path": "examples/inputs/tool-failure.json",
+      "bytes": 298,
+      "sha256": "06B87BF05E99C929F30C04BD4272261BDB58DBF55CCF64A8D45756F681F0945D"
+    },
+    {
+      "path": "examples/inputs/unsupported-feature.json",
+      "bytes": 368,
+      "sha256": "E0F72D11B92D6E7B66359FE416710446DD7D16AD30AD47B1020DAC4037C6FC84"
+    },
+    {
+      "path": "examples/offline_demo.py",
+      "bytes": 2494,
+      "sha256": "724B48228910B9AEDB84F78C3565999197E7CAC01DA2DA559B041C03D7833553"
+    },
+    {
+      "path": "examples/outputs/run-26912cc433694dcf.json",
+      "bytes": 2081,
+      "sha256": "D51BF4FA9EF7413146A682EE5C6B849B736149A5E676A3BF9DD54CB892E9D57F"
+    },
+    {
+      "path": "examples/outputs/run-26912cc433694dcf.md",
+      "bytes": 794,
+      "sha256": "77F81347B21977A2B23907E468E67D97DB0E5DB5ACDD69570DB85D4A2A5AEE15"
+    },
+    {
+      "path": "examples/outputs/run-939b1ba4c0c3466c.json",
+      "bytes": 2625,
+      "sha256": "3A42B8AB400008F76DA7488BA5256970D70CEA6DF4011307B912AD424B2FB12B"
+    },
+    {
+      "path": "examples/outputs/run-939b1ba4c0c3466c.md",
+      "bytes": 937,
+      "sha256": "4C9AE35F644186B57791DB46A434663F2180745DFAF2AF6E7FDBFD85FDFF0AA6"
+    },
+    {
+      "path": "examples/outputs/run-fc87dd0c12dd43c8.tool-failure.result.json",
+      "bytes": 789,
+      "sha256": "88C6936872F7F343262F74A10E2F21D57EBA7DB8926B8D44DEBB98FDAE4CFB6C"
+    },
+    {
+      "path": "examples/outputs/unsupported-feature.result.json",
+      "bytes": 450,
+      "sha256": "F5584E800627F0113708D1ECCDD62FF60E558685D8DF982912B6B26CF72DE16D"
+    },
+    {
+      "path": "examples/test-results/pytest.json",
+      "bytes": 489,
+      "sha256": "05F8C78B556C31711A466D500747D774A73C860EDC802F50CFE12362AA9D9ED5"
+    },
+    {
+      "path": "examples/test-results/pytest.txt",
+      "bytes": 204,
+      "sha256": "8E551947E460BE0320C3F879D336F745B9AA64E39F1736A135EA1B3DEFB3EB2E"
+    },
+    {
+      "path": "examples/tool_failure_demo.py",
+      "bytes": 4039,
+      "sha256": "46FD2967EEA6F351567E6643916956C538CEE6E407527862BB8D5E8DBE36678B"
+    },
+    {
+      "path": "examples/traces/run-26912cc433694dcf.trace.json",
+      "bytes": 10683,
+      "sha256": "210D6955174B4371E03319E45EF3FFCF227040B2658C15A2BDEE2AC9C066C6E9"
+    },
+    {
+      "path": "examples/traces/run-43b3c2997f6240b4.trace.json",
+      "bytes": 4022,
+      "sha256": "4F0919778FCF1C25A1ED3E879DFC6EC037D885FCE69471108CB295232C383391"
+    },
+    {
+      "path": "examples/traces/run-939b1ba4c0c3466c.trace.json",
+      "bytes": 34101,
+      "sha256": "EE45EDC76A07ADC2D37CF8D8379DA9BCD2CC267607CF324A0B3C439AC22BB234"
+    },
+    {
+      "path": "examples/traces/run-fc87dd0c12dd43c8.trace.json",
+      "bytes": 2690,
+      "sha256": "518D21D9FC1AFAABB21E77E769CC211BE287B83FC84BB21B1A3BED81932DA780"
+    },
+    {
+      "path": "README.md",
+      "bytes": 8489,
+      "sha256": "E92023CBDA9A66D6841D92D14BC7A0C3607649F3C3F8ABB82F4E6191DB8F49F4"
+    },
+    {
+      "path": "requirements.txt",
+      "bytes": 41,
+      "sha256": "8C55DCFBFBFF4490299CA6E5A2BA12C09665697F7087A6B554EA4FC420E47AEA"
+    },
+    {
+      "path": "src/__init__.py",
+      "bytes": 41,
+      "sha256": "E88EC06FB0CDFC4D8458D6D0ADBDF99A1242B47C3C5A7B54267A9A10D2010553"
+    },
+    {
+      "path": "src/agent.py",
+      "bytes": 17868,
+      "sha256": "FE057976EF61CD12867C9A2B216815FD4C175BDFF3B11BE82DAAE7A3C6C521E8"
+    },
+    {
+      "path": "src/cli.py",
+      "bytes": 5752,
+      "sha256": "A9628DBC89A3992CEC874023F481E8E09F11F4E25BA41A48B8F03D7A38C1F43C"
+    },
+    {
+      "path": "src/main.py",
+      "bytes": 113,
+      "sha256": "FBFB4DA3ED934D60DF48D6138ACD9FC9E5BFD49BAC89BAF6132CE2BB49BCB1B4"
+    },
+    {
+      "path": "src/models.py",
+      "bytes": 9254,
+      "sha256": "181BDAECD42978C4E868FD7669C6527A2FA58E982E6B18035F4E02B250935F5B"
+    },
+    {
+      "path": "src/tools.py",
+      "bytes": 13265,
+      "sha256": "A08F7F6D6624DD098535F67EFCA2DEB578C1721CE89C833A8066D17EEE4618D6"
+    },
+    {
+      "path": "tests/test_business.py",
+      "bytes": 10091,
+      "sha256": "902043886D64E7CFBAA537E45D86FD484F27F5358C73BF8AA75235FD986E1607"
+    },
+    {
+      "path": "tests/test_failure_evidence.py",
+      "bytes": 961,
+      "sha256": "05919D29C090CE49DA4A3AA9884B2E3BFE5DBC1C4FFF2DBCDD4440165CD2541B"
+    },
+    {
+      "path": "tests/test_smoke.py",
+      "bytes": 773,
+      "sha256": "2126366B7EF38A8EEB7433E46980613B66B2B0694097928C32F208C869FF27AD"
+    }
+  ]
+}

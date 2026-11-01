@@ -1,0 +1,150 @@
+{
+  "schema_version": "1.0",
+  "run_id": "run-43b3c2997f6240b4",
+  "request_id": "demo-unsupported-feature-01",
+  "model": "qwen-plus",
+  "synthetic": true,
+  "status": "needs_input",
+  "started_at": "2026-10-31T03:25:09.662913Z",
+  "ended_at": "2026-10-31T03:25:17.199728Z",
+  "budget": {
+    "max_model_requests": 10,
+    "max_tool_calls": 12,
+    "max_elapsed_seconds": 180,
+    "max_retries_per_error": 2
+  },
+  "usage": {
+    "model_requests": 3,
+    "tool_calls": 2,
+    "elapsed_seconds": 7.547
+  },
+  "final_draft_id": null,
+  "stop_reason": "模型判断资料不足，需要补充",
+  "events": [
+    {
+      "seq": 1,
+      "at": "2026-10-31T03:25:09.664474Z",
+      "kind": "llm_request",
+      "summary": "请求模型选择下一动作"
+    },
+    {
+      "seq": 2,
+      "at": "2026-10-31T03:25:12.222685Z",
+      "kind": "llm_response",
+      "summary": "收到模型响应",
+      "model_request_id": "chatcmpl-c6e5847c-2f19-9fa5-9a0f-930849b2de4b"
+    },
+    {
+      "seq": 3,
+      "at": "2026-10-31T03:25:12.222685Z",
+      "kind": "tool_call",
+      "summary": "模型调用 search_materials",
+      "tool_call": {
+        "call_id": "call_8ac661c7f56f410d84b9eb",
+        "tool": "search_materials",
+        "arguments": {
+          "query": "量子火箭",
+          "product_id": "demo-editor",
+          "top_k": 3
+        }
+      }
+    },
+    {
+      "seq": 4,
+      "at": "2026-10-31T03:25:12.228323Z",
+      "kind": "tool_result",
+      "summary": "search_materials: ok",
+      "tool_result": {
+        "schema_version": "1.0",
+        "call_id": "call_8ac661c7f56f410d84b9eb",
+        "tool": "search_materials",
+        "ok": true,
+        "data": {
+          "dataset_id": "demo-v1",
+          "query": "量子火箭",
+          "matches": [],
+          "warnings": [
+            "未检索到匹配的合成素材；可改写查询，不能编造事实。"
+          ]
+        },
+        "error": null,
+        "elapsed_ms": 16
+      }
+    },
+    {
+      "seq": 5,
+      "at": "2026-10-31T03:25:12.228323Z",
+      "kind": "llm_request",
+      "summary": "请求模型选择下一动作"
+    },
+    {
+      "seq": 6,
+      "at": "2026-10-31T03:25:14.421069Z",
+      "kind": "llm_response",
+      "summary": "收到模型响应",
+      "model_request_id": "chatcmpl-f56f3018-e15b-9ddb-ae88-9e1e06607184"
+    },
+    {
+      "seq": 7,
+      "at": "2026-10-31T03:25:14.421069Z",
+      "kind": "tool_call",
+      "summary": "模型调用 search_materials",
+      "tool_call": {
+        "call_id": "call_6ce6061fa5d143d3be6d68",
+        "tool": "search_materials",
+        "arguments": {
+          "query": "自动配音",
+          "product_id": "demo-editor",
+          "top_k": 3
+        }
+      }
+    },
+    {
+      "seq": 8,
+      "at": "2026-10-31T03:25:14.422619Z",
+      "kind": "tool_result",
+      "summary": "search_materials: ok",
+      "tool_result": {
+        "schema_version": "1.0",
+        "call_id": "call_6ce6061fa5d143d3be6d68",
+        "tool": "search_materials",
+        "ok": true,
+        "data": {
+          "dataset_id": "demo-v1",
+          "query": "自动配音",
+          "matches": [],
+          "warnings": [
+            "未检索到匹配的合成素材；可改写查询，不能编造事实。"
+          ]
+        },
+        "error": null,
+        "elapsed_ms": 0
+      }
+    },
+    {
+      "seq": 9,
+      "at": "2026-10-31T03:25:14.422619Z",
+      "kind": "llm_request",
+      "summary": "请求模型选择下一动作"
+    },
+    {
+      "seq": 10,
+      "at": "2026-10-31T03:25:17.199728Z",
+      "kind": "llm_response",
+      "summary": "收到模型响应",
+      "model_request_id": "chatcmpl-bd2fd804-df64-96eb-adff-3b3a8e4f11a4"
+    },
+    {
+      "seq": 11,
+      "at": "2026-10-31T03:25:17.199728Z",
+      "kind": "decision",
+      "summary": "模型请求补充素材或输入"
+    },
+    {
+      "seq": 12,
+      "at": "2026-10-31T03:25:17.199728Z",
+      "kind": "finish",
+      "summary": "模型判断资料不足，需要补充"
+    }
+  ]
+}

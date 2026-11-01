@@ -1,0 +1,15 @@
+{
+  "record_kind": "summary_of_existing_real_trace_not_a_new_model_run",
+  "source_trace": "examples/traces/run-43b3c2997f6240b4.trace.json",
+  "run_id": "run-43b3c2997f6240b4",
+  "model": "qwen-plus",
+  "status": "needs_input",
+  "reason": "模型判断资料不足，需要补充",
+  "script": null,
+  "usage": {
+    "model_requests": 3,
+    "tool_calls": 2,
+    "elapsed_seconds": 7.547
+  },
+  "source_started_at": "2026-10-31T03:25:09.662913Z"
+}

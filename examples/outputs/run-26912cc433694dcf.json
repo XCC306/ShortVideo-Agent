@@ -1,0 +1,77 @@
+{
+  "run_id": "run-26912cc433694dcf",
+  "draft": {
+    "schema_version": "1.0",
+    "draft_id": "offline-demo-d1",
+    "request_id": "demo-request-01",
+    "product_id": "demo-editor",
+    "title": "旅行记忆，配上字幕",
+    "concept": "一段轻快的旅行回忆。",
+    "scenes": [
+      {
+        "scene_id": "s1",
+        "order": 1,
+        "visual": "旅途片段与轻快字幕",
+        "narration": "演示剪辑器支持字幕功能。",
+        "subtitle": "旅行记忆",
+        "visual_hold_seconds": 15.0,
+        "estimated_duration_seconds": null,
+        "claim_ids": [
+          "c1"
+        ]
+      }
+    ],
+    "claims": [
+      {
+        "claim_id": "c1",
+        "scope": "narration",
+        "scene_id": "s1",
+        "surface_text": "演示剪辑器支持字幕功能。",
+        "text": "演示剪辑器支持字幕功能。",
+        "references": [
+          {
+            "dataset_id": "demo-v1",
+            "material_id": "P01",
+            "fact_id": "F01",
+            "evidence_quote": "演示剪辑器支持字幕功能。",
+            "synthetic": true
+          }
+        ]
+      }
+    ]
+  },
+  "duration_check": {
+    "draft_id": "offline-demo-d1",
+    "target_duration_seconds": 15,
+    "chars_per_second": 4.5,
+    "transition_seconds": 0.5,
+    "tolerance_ratio": 0.1,
+    "scenes": [
+      {
+        "scene_id": "s1",
+        "char_count": 11,
+        "speech_seconds": 2.44,
+        "effective_seconds": 15.0
+      }
+    ],
+    "total_seconds": 15.0,
+    "delta_seconds": 0.0,
+    "status": "within_tolerance",
+    "warnings": [
+      "字符数和画面停留时长仅为启发式估算，不等于实测配音时长；数字念法、语气和停顿未精确建模。"
+    ]
+  },
+  "rule_check": {
+    "draft_id": "offline-demo-d1",
+    "rule_set_id": "demo-brand-v1",
+    "status": "passed",
+    "passed": true,
+    "findings": [],
+    "checked_claim_ids": [
+      "c1"
+    ],
+    "warnings": [
+      "自动检查只覆盖字面规则与保守原子事实；无法证明任意自然语言断言均被识别。"
+    ]
+  }
+}

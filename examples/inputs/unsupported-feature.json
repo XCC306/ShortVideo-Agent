@@ -1,0 +1,11 @@
+{
+  "schema_version": "1.0",
+  "request_id": "demo-unsupported-feature-01",
+  "topic": "介绍演示剪辑器的量子火箭自动配音功能",
+  "audience": "想了解该功能的短视频创作者",
+  "platform": "抖音",
+  "target_duration_seconds": 15,
+  "style": "清楚、克制，不编造产品能力",
+  "product_id": "demo-editor",
+  "language": "zh-CN"
+}

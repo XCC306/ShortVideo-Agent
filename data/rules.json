@@ -1,0 +1,12 @@
+  {
+    "schema_version": "1.0", "dataset_id": "demo-rules-v1",
+    "rule_set_id": "demo-brand-v1", "product_id": "demo-editor", "synthetic": true,
+    "notice": "合成演示规则，不代表任何真实品牌政策。",
+    "rules": [
+      {"rule_id": "R01", "type": "forbidden_phrase", "severity": "error",
+       "message": "禁止无依据的绝对化表述。", "phrases": ["全网第一", "百分百成功", "一键爆款"],
+       "scopes": ["title", "concept", "visual", "narration", "subtitle"]},
+      {"rule_id": "R02", "type": "claim_references", "severity": "error",
+       "message": "产品事实必须有有效且匹配的合成证据。"}
+    ]
+  }

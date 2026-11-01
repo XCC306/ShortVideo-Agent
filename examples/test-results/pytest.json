@@ -1,0 +1,12 @@
+{
+  "record_kind": "actual_offline_subprocess_execution",
+  "date": "2026-11-01",
+  "timezone": "Asia/Shanghai",
+  "python": "3.11.15",
+  "command_normalized_for_portability": "python -B -m pytest -q -p no:cacheprovider --basetemp <owned temporary directory>",
+  "exit_code": 0,
+  "stdout": "...............                                                          [100%]\n15 passed in 4.32s\n",
+  "stderr": "",
+  "pip_check": "No broken requirements found.",
+  "fresh_qwen_requests": 0
+}

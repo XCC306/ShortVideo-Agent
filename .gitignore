@@ -1,0 +1,39 @@
+# Credentials: keep only the empty template.
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+secrets/
+credentials*.json
+
+# Local setup helpers retained in the original workspace, not deliverables.
+.check-qwen-config.ps1
+.fix-qwen-config.ps1
+
+# Local environments and caches.
+.venv/
+.venv-migrated-backup-*/
+venv/
+env/
+.conda/
+.python-runtime/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.cache/
+.coverage
+.coverage.*
+htmlcov/
+*.egg-info/
+build/
+dist/
+*.log
+
+# Editor/OS local state; intentional documentation/examples stay trackable.
+.vscode/
+.idea/
+Thumbs.db
+.DS_Store

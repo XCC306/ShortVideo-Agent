@@ -1,0 +1,1 @@
+"""ShortVideo-Agent project scaffold."""

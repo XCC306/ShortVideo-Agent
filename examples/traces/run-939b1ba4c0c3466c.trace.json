@@ -1,0 +1,1096 @@
+{
+  "schema_version": "1.0",
+  "run_id": "run-939b1ba4c0c3466c",
+  "request_id": "demo-request-01",
+  "model": "qwen-plus",
+  "synthetic": true,
+  "status": "completed",
+  "started_at": "2026-10-31T03:19:43.624100Z",
+  "ended_at": "2026-10-31T03:20:51.603146Z",
+  "budget": {
+    "max_model_requests": 10,
+    "max_tool_calls": 12,
+    "max_elapsed_seconds": 180,
+    "max_retries_per_error": 2
+  },
+  "usage": {
+    "model_requests": 10,
+    "tool_calls": 9,
+    "elapsed_seconds": 67.969
+  },
+  "final_draft_id": "draft-003",
+  "stop_reason": "验收通过",
+  "events": [
+    {
+      "seq": 1,
+      "at": "2026-10-31T03:19:43.627290Z",
+      "kind": "llm_request",
+      "summary": "请求模型选择下一动作"
+    },
+    {
+      "seq": 2,
+      "at": "2026-10-31T03:19:46.488521Z",
+      "kind": "llm_response",
+      "summary": "收到模型响应",
+      "model_request_id": "chatcmpl-259fde28-63de-9d7c-8003-3151d3b6fb79"
+    },
+    {
+      "seq": 3,
+      "at": "2026-10-31T03:19:46.488521Z",
+      "kind": "tool_call",
+      "summary": "模型调用 search_materials",
+      "tool_call": {
+        "call_id": "call_f27e4236d55d4fdcac3777",
+        "tool": "search_materials",
+        "arguments": {
+          "query": "字幕整理",
+          "product_id": "demo-editor",
+          "top_k": 3
+        }
+      }
+    },
+    {
+      "seq": 4,
+      "at": "2026-10-31T03:19:46.490615Z",
+      "kind": "tool_result",
+      "summary": "search_materials: ok",
+      "tool_result": {
+        "schema_version": "1.0",
+        "call_id": "call_f27e4236d55d4fdcac3777",
+        "tool": "search_materials",
+        "ok": true,
+        "data": {
+          "dataset_id": "demo-v1",
+          "query": "字幕整理",
+          "matches": [
+            {
+              "material": {
+                "material_id": "P01",
+                "product_id": "demo-editor",
+                "title": "演示剪辑器·字幕资料",
+                "summary": "合成的字幕功能说明。",
+                "tags": [
+                  "字幕",
+                  "剪辑"
+                ],
+                "applicable_platforms": [],
+                "limitations": [],
+                "facts": [
+                  {
+                    "fact_id": "F01",
+                    "text": "演示剪辑器支持字幕功能。"
+                  },
+                  {
+                    "fact_id": "F02",
+                    "text": "演示剪辑器可以调整字幕样式。"
+                  }
+                ],
+                "synthetic": true
+              },
+              "score": 0.2667
+            }
+          ],
+          "warnings": []
+        },
+        "error": null,
+        "elapsed_ms": 0
+      }
+    },
+    {
+      "seq": 5,
+      "at": "2026-10-31T03:19:46.491129Z",
+      "kind": "llm_request",
+      "summary": "请求模型选择下一动作"
+    },
+    {
+      "seq": 6,
+      "at": "2026-10-31T03:19:48.796868Z",
+      "kind": "llm_response",
+      "summary": "收到模型响应",
+      "model_request_id": "chatcmpl-41ec9611-ece5-98c2-9f41-92e39dae0451"
+    },
+    {
+      "seq": 7,
+      "at": "2026-10-31T03:19:48.796868Z",
+      "kind": "tool_call",
+      "summary": "模型调用 search_materials",
+      "tool_call": {
+        "call_id": "call_52009c88c54c45fcbc38d3",
+        "tool": "search_materials",
+        "arguments": {
+          "query": "旅行片段",
+          "product_id": "demo-editor",
+          "top_k": 3
+        }
+      }
+    },
+    {
+      "seq": 8,
+      "at": "2026-10-31T03:19:48.797400Z",
+      "kind": "tool_result",
+      "summary": "search_materials: ok",
+      "tool_result": {
+        "schema_version": "1.0",
+        "call_id": "call_52009c88c54c45fcbc38d3",
+        "tool": "search_materials",
+        "ok": true,
+        "data": {
+          "dataset_id": "demo-v1",
+          "query": "旅行片段",
+          "matches": [
+            {
+              "material": {
+                "material_id": "P02",
+                "product_id": "demo-editor",
+                "title": "演示剪辑器·片段资料",
+                "summary": "合成的片段排序说明。",
+                "tags": [
+                  "片段",
+                  "排序"
+                ],
+                "applicable_platforms": [],
+                "limitations": [],
+                "facts": [
+                  {
+                    "fact_id": "F01",
+                    "text": "演示剪辑器支持调整片段顺序。"
+                  }
+                ],
+                "synthetic": true
+              },
+              "score": 0.2667
+            }
+          ],
+          "warnings": []
+        },
+        "error": null,
+        "elapsed_ms": 0
+      }
+    },
+    {
+      "seq": 9,
+      "at": "2026-10-31T03:19:48.797400Z",
+      "kind": "llm_request",
+      "summary": "请求模型选择下一动作"
+    },
+    {
+      "seq": 10,
+      "at": "2026-10-31T03:19:58.936154Z",
+      "kind": "llm_response",
+      "summary": "收到模型响应",
+      "model_request_id": "chatcmpl-1fa5fb4c-a4cb-947b-965c-04a128e7d9a9"
+    },
+    {
+      "seq": 11,
+      "at": "2026-10-31T03:19:58.936154Z",
+      "kind": "draft",
+      "summary": "记录不可变草稿快照",
+      "draft": {
+        "schema_version": "1.0",
+        "draft_id": "draft-001",
+        "request_id": "demo-request-01",
+        "product_id": "demo-editor",
+        "title": "旅行片段字幕整理",
+        "concept": "用字幕快速整理旅行视频片段，轻快清晰。",
+        "scenes": [
+          {
+            "scene_id": "s1",
+            "order": 1,
+            "visual": "旅行风景空镜（海滩/山景）",
+            "narration": "演示剪辑器支持字幕功能。",
+            "subtitle": "演示剪辑器支持字幕功能。",
+            "visual_hold_seconds": 15.0,
+            "estimated_duration_seconds": null,
+            "claim_ids": [
+              "c1"
+            ]
+          }
+        ],
+        "claims": [
+          {
+            "claim_id": "c1",
+            "scope": "narration",
+            "scene_id": "s1",
+            "surface_text": "演示剪辑器支持字幕功能。",
+            "text": "演示剪辑器支持字幕功能。",
+            "references": [
+              {
+                "dataset_id": "demo-v1",
+                "material_id": "P01",
+                "fact_id": "F01",
+                "evidence_quote": "演示剪辑器支持字幕功能。",
+                "synthetic": true
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "seq": 12,
+      "at": "2026-10-31T03:19:58.936154Z",
+      "kind": "tool_call",
+      "summary": "模型调用 estimate_duration",
+      "tool_call": {
+        "call_id": "call_e164726ac4d84182a7d231",
+        "tool": "estimate_duration",
+        "arguments": {
+          "draft": {
+            "schema_version": "1.0",
+            "draft_id": "draft-001",
+            "request_id": "demo-request-01",
+            "product_id": "demo-editor",
+            "title": "旅行片段字幕整理",
+            "concept": "用字幕快速整理旅行视频片段，轻快清晰。",
+            "scenes": [
+              {
+                "scene_id": "s1",
+                "order": 1,
+                "visual": "旅行风景空镜（海滩/山景）",
+                "narration": "演示剪辑器支持字幕功能。",
+                "subtitle": "演示剪辑器支持字幕功能。",
+                "visual_hold_seconds": 15.0,
+                "estimated_duration_seconds": null,
+                "claim_ids": [
+                  "c1"
+                ]
+              }
+            ],
+            "claims": [
+              {
+                "claim_id": "c1",
+                "scope": "narration",
+                "scene_id": "s1",
+                "surface_text": "演示剪辑器支持字幕功能。",
+                "text": "演示剪辑器支持字幕功能。",
+                "references": [
+                  {
+                    "dataset_id": "demo-v1",
+                    "material_id": "P01",
+                    "fact_id": "F01",
+                    "evidence_quote": "演示剪辑器支持字幕功能。",
+                    "synthetic": true
+                  }
+                ]
+              }
+            ]
+          },
+          "target_duration_seconds": 15,
+          "chars_per_second": 5,
+          "transition_seconds": 0.5,
+          "tolerance_ratio": 0.1
+        }
+      }
+    },
+    {
+      "seq": 13,
+      "at": "2026-10-31T03:19:58.937700Z",
+      "kind": "tool_result",
+      "summary": "estimate_duration: ok",
+      "tool_result": {
+        "schema_version": "1.0",
+        "call_id": "call_e164726ac4d84182a7d231",
+        "tool": "estimate_duration",
+        "ok": true,
+        "data": {
+          "draft_id": "draft-001",
+          "target_duration_seconds": 15,
+          "chars_per_second": 5.0,
+          "transition_seconds": 0.5,
+          "tolerance_ratio": 0.1,
+          "scenes": [
+            {
+              "scene_id": "s1",
+              "char_count": 11,
+              "speech_seconds": 2.2,
+              "effective_seconds": 15.0
+            }
+          ],
+          "total_seconds": 15.0,
+          "delta_seconds": 0.0,
+          "status": "within_tolerance",
+          "warnings": [
+            "字符数和画面停留时长仅为启发式估算，不等于实测配音时长；数字念法、语气和停顿未精确建模。"
+          ]
+        },
+        "error": null,
+        "elapsed_ms": 0
+      }
+    },
+    {
+      "seq": 14,
+      "at": "2026-10-31T03:19:58.937700Z",
+      "kind": "llm_request",
+      "summary": "请求模型选择下一动作"
+    },
+    {
+      "seq": 15,
+      "at": "2026-10-31T03:20:07.809925Z",
+      "kind": "llm_response",
+      "summary": "收到模型响应",
+      "model_request_id": "chatcmpl-55c7d6e8-b78a-960b-85c4-16146cb0419b"
+    },
+    {
+      "seq": 16,
+      "at": "2026-10-31T03:20:07.810438Z",
+      "kind": "tool_call",
+      "summary": "模型调用 check_rules",
+      "tool_call": {
+        "call_id": "call_c71544e1da7b48c181478d",
+        "tool": "check_rules",
+        "arguments": {
+          "draft": {
+            "schema_version": "1.0",
+            "draft_id": "draft-001",
+            "request_id": "demo-request-01",
+            "product_id": "demo-editor",
+            "title": "旅行片段字幕整理",
+            "concept": "用字幕快速整理旅行视频片段，轻快清晰。",
+            "scenes": [
+              {
+                "scene_id": "s1",
+                "order": 1,
+                "visual": "旅行风景空镜（海滩/山景）",
+                "narration": "演示剪辑器支持字幕功能。",
+                "subtitle": "演示剪辑器支持字幕功能。",
+                "visual_hold_seconds": 15.0,
+                "estimated_duration_seconds": null,
+                "claim_ids": [
+                  "c1"
+                ]
+              }
+            ],
+            "claims": [
+              {
+                "claim_id": "c1",
+                "scope": "narration",
+                "scene_id": "s1",
+                "surface_text": "演示剪辑器支持字幕功能。",
+                "text": "演示剪辑器支持字幕功能。",
+                "references": [
+                  {
+                    "dataset_id": "demo-v1",
+                    "material_id": "P01",
+                    "fact_id": "F01",
+                    "evidence_quote": "演示剪辑器支持字幕功能。",
+                    "synthetic": true
+                  }
+                ]
+              }
+            ]
+          },
+          "rule_set_id": "demo-brand-v1"
+        }
+      }
+    },
+    {
+      "seq": 17,
+      "at": "2026-10-31T03:20:07.810438Z",
+      "kind": "tool_result",
+      "summary": "check_rules: ok",
+      "tool_result": {
+        "schema_version": "1.0",
+        "call_id": "call_c71544e1da7b48c181478d",
+        "tool": "check_rules",
+        "ok": true,
+        "data": {
+          "draft_id": "draft-001",
+          "rule_set_id": "demo-brand-v1",
+          "status": "needs_review",
+          "passed": false,
+          "findings": [
+            {
+              "finding_id": "finding-1",
+              "rule_id": null,
+              "code": "CLAIM_COVERAGE_REVIEW",
+              "severity": "review",
+              "scope": "subtitle",
+              "scene_id": "s1",
+              "claim_id": null,
+              "message": "发现未由 Claim 覆盖的疑似产品事实，需人工复核"
+            }
+          ],
+          "checked_claim_ids": [
+            "c1"
+          ],
+          "warnings": [
+            "自动检查只覆盖字面规则与保守原子事实；无法证明任意自然语言断言均被识别。"
+          ]
+        },
+        "error": null,
+        "elapsed_ms": 0
+      }
+    },
+    {
+      "seq": 18,
+      "at": "2026-10-31T03:20:07.810438Z",
+      "kind": "llm_request",
+      "summary": "请求模型选择下一动作"
+    },
+    {
+      "seq": 19,
+      "at": "2026-10-31T03:20:10.108394Z",
+      "kind": "llm_response",
+      "summary": "收到模型响应",
+      "model_request_id": "chatcmpl-5006fb08-6c36-91ab-bd7e-c9fe1d48b054"
+    },
+    {
+      "seq": 20,
+      "at": "2026-10-31T03:20:10.108394Z",
+      "kind": "tool_call",
+      "summary": "模型调用 search_materials",
+      "tool_call": {
+        "call_id": "call_c50d86c308cf439094f8fc",
+        "tool": "search_materials",
+        "arguments": {
+          "query": "字幕整理 旅行片段",
+          "product_id": "demo-editor",
+          "top_k": 3
+        }
+      }
+    },
+    {
+      "seq": 21,
+      "at": "2026-10-31T03:20:10.108961Z",
+      "kind": "tool_result",
+      "summary": "search_materials: ok",
+      "tool_result": {
+        "schema_version": "1.0",
+        "call_id": "call_c50d86c308cf439094f8fc",
+        "tool": "search_materials",
+        "ok": true,
+        "data": {
+          "dataset_id": "demo-v1",
+          "query": "字幕整理 旅行片段",
+          "matches": [
+            {
+              "material": {
+                "material_id": "P01",
+                "product_id": "demo-editor",
+                "title": "演示剪辑器·字幕资料",
+                "summary": "合成的字幕功能说明。",
+                "tags": [
+                  "字幕",
+                  "剪辑"
+                ],
+                "applicable_platforms": [],
+                "limitations": [],
+                "facts": [
+                  {
+                    "fact_id": "F01",
+                    "text": "演示剪辑器支持字幕功能。"
+                  },
+                  {
+                    "fact_id": "F02",
+                    "text": "演示剪辑器可以调整字幕样式。"
+                  }
+                ],
+                "synthetic": true
+              },
+              "score": 0.1333
+            },
+            {
+              "material": {
+                "material_id": "P02",
+                "product_id": "demo-editor",
+                "title": "演示剪辑器·片段资料",
+                "summary": "合成的片段排序说明。",
+                "tags": [
+                  "片段",
+                  "排序"
+                ],
+                "applicable_platforms": [],
+                "limitations": [],
+                "facts": [
+                  {
+                    "fact_id": "F01",
+                    "text": "演示剪辑器支持调整片段顺序。"
+                  }
+                ],
+                "synthetic": true
+              },
+              "score": 0.1333
+            }
+          ],
+          "warnings": []
+        },
+        "error": null,
+        "elapsed_ms": 0
+      }
+    },
+    {
+      "seq": 22,
+      "at": "2026-10-31T03:20:10.108961Z",
+      "kind": "llm_request",
+      "summary": "请求模型选择下一动作"
+    },
+    {
+      "seq": 23,
+      "at": "2026-10-31T03:20:18.767745Z",
+      "kind": "llm_response",
+      "summary": "收到模型响应",
+      "model_request_id": "chatcmpl-e79073b1-b563-937e-8787-687418f041ef"
+    },
+    {
+      "seq": 24,
+      "at": "2026-10-31T03:20:18.768275Z",
+      "kind": "draft",
+      "summary": "记录不可变草稿快照",
+      "draft": {
+        "schema_version": "1.0",
+        "draft_id": "draft-002",
+        "request_id": "demo-request-01",
+        "product_id": "demo-editor",
+        "title": "旅行片段字幕整理",
+        "concept": "用字幕快速整理旅行视频片段，轻快清晰。",
+        "scenes": [
+          {
+            "scene_id": "s1",
+            "order": 1,
+            "visual": "旅行风景空镜（海滩/山景）",
+            "narration": "演示剪辑器支持字幕功能。",
+            "subtitle": "演示剪辑器支持字幕功能。",
+            "visual_hold_seconds": 15.0,
+            "estimated_duration_seconds": null,
+            "claim_ids": [
+              "c1"
+            ]
+          }
+        ],
+        "claims": [
+          {
+            "claim_id": "c1",
+            "scope": "narration",
+            "scene_id": "s1",
+            "surface_text": "演示剪辑器支持字幕功能。",
+            "text": "演示剪辑器支持字幕功能。",
+            "references": [
+              {
+                "dataset_id": "demo-v1",
+                "material_id": "P01",
+                "fact_id": "F01",
+                "evidence_quote": "演示剪辑器支持字幕功能。",
+                "synthetic": true
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "seq": 25,
+      "at": "2026-10-31T03:20:18.768275Z",
+      "kind": "tool_call",
+      "summary": "模型调用 estimate_duration",
+      "tool_call": {
+        "call_id": "call_ca44581499714112ba4527",
+        "tool": "estimate_duration",
+        "arguments": {
+          "draft": {
+            "schema_version": "1.0",
+            "draft_id": "draft-002",
+            "request_id": "demo-request-01",
+            "product_id": "demo-editor",
+            "title": "旅行片段字幕整理",
+            "concept": "用字幕快速整理旅行视频片段，轻快清晰。",
+            "scenes": [
+              {
+                "scene_id": "s1",
+                "order": 1,
+                "visual": "旅行风景空镜（海滩/山景）",
+                "narration": "演示剪辑器支持字幕功能。",
+                "subtitle": "演示剪辑器支持字幕功能。",
+                "visual_hold_seconds": 15.0,
+                "estimated_duration_seconds": null,
+                "claim_ids": [
+                  "c1"
+                ]
+              }
+            ],
+            "claims": [
+              {
+                "claim_id": "c1",
+                "scope": "narration",
+                "scene_id": "s1",
+                "surface_text": "演示剪辑器支持字幕功能。",
+                "text": "演示剪辑器支持字幕功能。",
+                "references": [
+                  {
+                    "dataset_id": "demo-v1",
+                    "material_id": "P01",
+                    "fact_id": "F01",
+                    "evidence_quote": "演示剪辑器支持字幕功能。",
+                    "synthetic": true
+                  }
+                ]
+              }
+            ]
+          },
+          "target_duration_seconds": 15,
+          "chars_per_second": 5,
+          "transition_seconds": 0.5,
+          "tolerance_ratio": 0.1
+        }
+      }
+    },
+    {
+      "seq": 26,
+      "at": "2026-10-31T03:20:18.768275Z",
+      "kind": "tool_result",
+      "summary": "estimate_duration: ok",
+      "tool_result": {
+        "schema_version": "1.0",
+        "call_id": "call_ca44581499714112ba4527",
+        "tool": "estimate_duration",
+        "ok": true,
+        "data": {
+          "draft_id": "draft-002",
+          "target_duration_seconds": 15,
+          "chars_per_second": 5.0,
+          "transition_seconds": 0.5,
+          "tolerance_ratio": 0.1,
+          "scenes": [
+            {
+              "scene_id": "s1",
+              "char_count": 11,
+              "speech_seconds": 2.2,
+              "effective_seconds": 15.0
+            }
+          ],
+          "total_seconds": 15.0,
+          "delta_seconds": 0.0,
+          "status": "within_tolerance",
+          "warnings": [
+            "字符数和画面停留时长仅为启发式估算，不等于实测配音时长；数字念法、语气和停顿未精确建模。"
+          ]
+        },
+        "error": null,
+        "elapsed_ms": 0
+      }
+    },
+    {
+      "seq": 27,
+      "at": "2026-10-31T03:20:18.768275Z",
+      "kind": "llm_request",
+      "summary": "请求模型选择下一动作"
+    },
+    {
+      "seq": 28,
+      "at": "2026-10-31T03:20:27.099555Z",
+      "kind": "llm_response",
+      "summary": "收到模型响应",
+      "model_request_id": "chatcmpl-dd07cd7a-aee1-94df-bf4b-fbdf22a12fb2"
+    },
+    {
+      "seq": 29,
+      "at": "2026-10-31T03:20:27.099555Z",
+      "kind": "tool_call",
+      "summary": "模型调用 check_rules",
+      "tool_call": {
+        "call_id": "call_53f4791db0064bd19ae08e",
+        "tool": "check_rules",
+        "arguments": {
+          "draft": {
+            "schema_version": "1.0",
+            "draft_id": "draft-002",
+            "request_id": "demo-request-01",
+            "product_id": "demo-editor",
+            "title": "旅行片段字幕整理",
+            "concept": "用字幕快速整理旅行视频片段，轻快清晰。",
+            "scenes": [
+              {
+                "scene_id": "s1",
+                "order": 1,
+                "visual": "旅行风景空镜（海滩/山景）",
+                "narration": "演示剪辑器支持字幕功能。",
+                "subtitle": "演示剪辑器支持字幕功能。",
+                "visual_hold_seconds": 15.0,
+                "estimated_duration_seconds": null,
+                "claim_ids": [
+                  "c1"
+                ]
+              }
+            ],
+            "claims": [
+              {
+                "claim_id": "c1",
+                "scope": "narration",
+                "scene_id": "s1",
+                "surface_text": "演示剪辑器支持字幕功能。",
+                "text": "演示剪辑器支持字幕功能。",
+                "references": [
+                  {
+                    "dataset_id": "demo-v1",
+                    "material_id": "P01",
+                    "fact_id": "F01",
+                    "evidence_quote": "演示剪辑器支持字幕功能。",
+                    "synthetic": true
+                  }
+                ]
+              }
+            ]
+          },
+          "rule_set_id": "demo-brand-v1"
+        }
+      }
+    },
+    {
+      "seq": 30,
+      "at": "2026-10-31T03:20:27.099555Z",
+      "kind": "tool_result",
+      "summary": "check_rules: ok",
+      "tool_result": {
+        "schema_version": "1.0",
+        "call_id": "call_53f4791db0064bd19ae08e",
+        "tool": "check_rules",
+        "ok": true,
+        "data": {
+          "draft_id": "draft-002",
+          "rule_set_id": "demo-brand-v1",
+          "status": "needs_review",
+          "passed": false,
+          "findings": [
+            {
+              "finding_id": "finding-1",
+              "rule_id": null,
+              "code": "CLAIM_COVERAGE_REVIEW",
+              "severity": "review",
+              "scope": "subtitle",
+              "scene_id": "s1",
+              "claim_id": null,
+              "message": "发现未由 Claim 覆盖的疑似产品事实，需人工复核"
+            }
+          ],
+          "checked_claim_ids": [
+            "c1"
+          ],
+          "warnings": [
+            "自动检查只覆盖字面规则与保守原子事实；无法证明任意自然语言断言均被识别。"
+          ]
+        },
+        "error": null,
+        "elapsed_ms": 0
+      }
+    },
+    {
+      "seq": 31,
+      "at": "2026-10-31T03:20:27.099555Z",
+      "kind": "llm_request",
+      "summary": "请求模型选择下一动作"
+    },
+    {
+      "seq": 32,
+      "at": "2026-10-31T03:20:38.546193Z",
+      "kind": "llm_response",
+      "summary": "收到模型响应",
+      "model_request_id": "chatcmpl-172defd4-0478-9c7f-98f7-a9107ddb0c74"
+    },
+    {
+      "seq": 33,
+      "at": "2026-10-31T03:20:38.546193Z",
+      "kind": "draft",
+      "summary": "记录不可变草稿快照",
+      "draft": {
+        "schema_version": "1.0",
+        "draft_id": "draft-003",
+        "request_id": "demo-request-01",
+        "product_id": "demo-editor",
+        "title": "旅行片段字幕整理",
+        "concept": "用字幕快速整理旅行视频片段，轻快清晰。",
+        "scenes": [
+          {
+            "scene_id": "s1",
+            "order": 1,
+            "visual": "旅行风景空镜（海滩/山景）",
+            "narration": "演示剪辑器支持字幕功能。",
+            "subtitle": "演示剪辑器支持字幕功能。",
+            "visual_hold_seconds": 15.0,
+            "estimated_duration_seconds": null,
+            "claim_ids": [
+              "c1",
+              "c2"
+            ]
+          }
+        ],
+        "claims": [
+          {
+            "claim_id": "c1",
+            "scope": "narration",
+            "scene_id": "s1",
+            "surface_text": "演示剪辑器支持字幕功能。",
+            "text": "演示剪辑器支持字幕功能。",
+            "references": [
+              {
+                "dataset_id": "demo-v1",
+                "material_id": "P01",
+                "fact_id": "F01",
+                "evidence_quote": "演示剪辑器支持字幕功能。",
+                "synthetic": true
+              }
+            ]
+          },
+          {
+            "claim_id": "c2",
+            "scope": "subtitle",
+            "scene_id": "s1",
+            "surface_text": "演示剪辑器支持字幕功能。",
+            "text": "演示剪辑器支持字幕功能。",
+            "references": [
+              {
+                "dataset_id": "demo-v1",
+                "material_id": "P01",
+                "fact_id": "F01",
+                "evidence_quote": "演示剪辑器支持字幕功能。",
+                "synthetic": true
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "seq": 34,
+      "at": "2026-10-31T03:20:38.546193Z",
+      "kind": "tool_call",
+      "summary": "模型调用 estimate_duration",
+      "tool_call": {
+        "call_id": "call_6b98f0d782444ad9a85437",
+        "tool": "estimate_duration",
+        "arguments": {
+          "draft": {
+            "schema_version": "1.0",
+            "draft_id": "draft-003",
+            "request_id": "demo-request-01",
+            "product_id": "demo-editor",
+            "title": "旅行片段字幕整理",
+            "concept": "用字幕快速整理旅行视频片段，轻快清晰。",
+            "scenes": [
+              {
+                "scene_id": "s1",
+                "order": 1,
+                "visual": "旅行风景空镜（海滩/山景）",
+                "narration": "演示剪辑器支持字幕功能。",
+                "subtitle": "演示剪辑器支持字幕功能。",
+                "visual_hold_seconds": 15.0,
+                "estimated_duration_seconds": null,
+                "claim_ids": [
+                  "c1",
+                  "c2"
+                ]
+              }
+            ],
+            "claims": [
+              {
+                "claim_id": "c1",
+                "scope": "narration",
+                "scene_id": "s1",
+                "surface_text": "演示剪辑器支持字幕功能。",
+                "text": "演示剪辑器支持字幕功能。",
+                "references": [
+                  {
+                    "dataset_id": "demo-v1",
+                    "material_id": "P01",
+                    "fact_id": "F01",
+                    "evidence_quote": "演示剪辑器支持字幕功能。",
+                    "synthetic": true
+                  }
+                ]
+              },
+              {
+                "claim_id": "c2",
+                "scope": "subtitle",
+                "scene_id": "s1",
+                "surface_text": "演示剪辑器支持字幕功能。",
+                "text": "演示剪辑器支持字幕功能。",
+                "references": [
+                  {
+                    "dataset_id": "demo-v1",
+                    "material_id": "P01",
+                    "fact_id": "F01",
+                    "evidence_quote": "演示剪辑器支持字幕功能。",
+                    "synthetic": true
+                  }
+                ]
+              }
+            ]
+          },
+          "target_duration_seconds": 15,
+          "chars_per_second": 5,
+          "transition_seconds": 0.5,
+          "tolerance_ratio": 0.1
+        }
+      }
+    },
+    {
+      "seq": 35,
+      "at": "2026-10-31T03:20:38.547723Z",
+      "kind": "tool_result",
+      "summary": "estimate_duration: ok",
+      "tool_result": {
+        "schema_version": "1.0",
+        "call_id": "call_6b98f0d782444ad9a85437",
+        "tool": "estimate_duration",
+        "ok": true,
+        "data": {
+          "draft_id": "draft-003",
+          "target_duration_seconds": 15,
+          "chars_per_second": 5.0,
+          "transition_seconds": 0.5,
+          "tolerance_ratio": 0.1,
+          "scenes": [
+            {
+              "scene_id": "s1",
+              "char_count": 11,
+              "speech_seconds": 2.2,
+              "effective_seconds": 15.0
+            }
+          ],
+          "total_seconds": 15.0,
+          "delta_seconds": 0.0,
+          "status": "within_tolerance",
+          "warnings": [
+            "字符数和画面停留时长仅为启发式估算，不等于实测配音时长；数字念法、语气和停顿未精确建模。"
+          ]
+        },
+        "error": null,
+        "elapsed_ms": 0
+      }
+    },
+    {
+      "seq": 36,
+      "at": "2026-10-31T03:20:38.547723Z",
+      "kind": "llm_request",
+      "summary": "请求模型选择下一动作"
+    },
+    {
+      "seq": 37,
+      "at": "2026-10-31T03:20:49.412780Z",
+      "kind": "llm_response",
+      "summary": "收到模型响应",
+      "model_request_id": "chatcmpl-706cde90-07d5-99a5-bbee-cd1cd58a7062"
+    },
+    {
+      "seq": 38,
+      "at": "2026-10-31T03:20:49.412780Z",
+      "kind": "tool_call",
+      "summary": "模型调用 check_rules",
+      "tool_call": {
+        "call_id": "call_14b4bc671f804fd2b6dbe2",
+        "tool": "check_rules",
+        "arguments": {
+          "draft": {
+            "schema_version": "1.0",
+            "draft_id": "draft-003",
+            "request_id": "demo-request-01",
+            "product_id": "demo-editor",
+            "title": "旅行片段字幕整理",
+            "concept": "用字幕快速整理旅行视频片段，轻快清晰。",
+            "scenes": [
+              {
+                "scene_id": "s1",
+                "order": 1,
+                "visual": "旅行风景空镜（海滩/山景）",
+                "narration": "演示剪辑器支持字幕功能。",
+                "subtitle": "演示剪辑器支持字幕功能。",
+                "visual_hold_seconds": 15.0,
+                "estimated_duration_seconds": null,
+                "claim_ids": [
+                  "c1",
+                  "c2"
+                ]
+              }
+            ],
+            "claims": [
+              {
+                "claim_id": "c1",
+                "scope": "narration",
+                "scene_id": "s1",
+                "surface_text": "演示剪辑器支持字幕功能。",
+                "text": "演示剪辑器支持字幕功能。",
+                "references": [
+                  {
+                    "dataset_id": "demo-v1",
+                    "material_id": "P01",
+                    "fact_id": "F01",
+                    "evidence_quote": "演示剪辑器支持字幕功能。",
+                    "synthetic": true
+                  }
+                ]
+              },
+              {
+                "claim_id": "c2",
+                "scope": "subtitle",
+                "scene_id": "s1",
+                "surface_text": "演示剪辑器支持字幕功能。",
+                "text": "演示剪辑器支持字幕功能。",
+                "references": [
+                  {
+                    "dataset_id": "demo-v1",
+                    "material_id": "P01",
+                    "fact_id": "F01",
+                    "evidence_quote": "演示剪辑器支持字幕功能。",
+                    "synthetic": true
+                  }
+                ]
+              }
+            ]
+          },
+          "rule_set_id": "demo-brand-v1"
+        }
+      }
+    },
+    {
+      "seq": 39,
+      "at": "2026-10-31T03:20:49.412780Z",
+      "kind": "tool_result",
+      "summary": "check_rules: ok",
+      "tool_result": {
+        "schema_version": "1.0",
+        "call_id": "call_14b4bc671f804fd2b6dbe2",
+        "tool": "check_rules",
+        "ok": true,
+        "data": {
+          "draft_id": "draft-003",
+          "rule_set_id": "demo-brand-v1",
+          "status": "passed",
+          "passed": true,
+          "findings": [],
+          "checked_claim_ids": [
+            "c1",
+            "c2"
+          ],
+          "warnings": [
+            "自动检查只覆盖字面规则与保守原子事实；无法证明任意自然语言断言均被识别。"
+          ]
+        },
+        "error": null,
+        "elapsed_ms": 0
+      }
+    },
+    {
+      "seq": 40,
+      "at": "2026-10-31T03:20:49.412780Z",
+      "kind": "llm_request",
+      "summary": "请求模型选择下一动作"
+    },
+    {
+      "seq": 41,
+      "at": "2026-10-31T03:20:51.602617Z",
+      "kind": "llm_response",
+      "summary": "收到模型响应",
+      "model_request_id": "chatcmpl-2717690e-9dc1-9f2a-9f9b-5b46a2b42d23"
+    },
+    {
+      "seq": 42,
+      "at": "2026-10-31T03:20:51.603146Z",
+      "kind": "decision",
+      "summary": "同一最新草稿通过两项检查"
+    },
+    {
+      "seq": 43,
+      "at": "2026-10-31T03:20:51.603146Z",
+      "kind": "finish",
+      "summary": "验收通过"
+    }
+  ]
+}

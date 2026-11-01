@@ -1,0 +1,103 @@
+{
+  "schema_version": "1.0",
+  "run_id": "run-fc87dd0c12dd43c8",
+  "request_id": "demo-tool-failure-01",
+  "model": "offline-tool-failure-injection",
+  "synthetic": true,
+  "status": "needs_input",
+  "started_at": "2026-11-01T04:35:20.862683Z",
+  "ended_at": "2026-11-01T04:35:20.868771Z",
+  "budget": {
+    "max_model_requests": 10,
+    "max_tool_calls": 12,
+    "max_elapsed_seconds": 180,
+    "max_retries_per_error": 2
+  },
+  "usage": {
+    "model_requests": 2,
+    "tool_calls": 1,
+    "elapsed_seconds": 0.0
+  },
+  "final_draft_id": null,
+  "stop_reason": "模型判断资料不足，需要补充",
+  "events": [
+    {
+      "seq": 1,
+      "at": "2026-11-01T04:35:20.867253Z",
+      "kind": "llm_request",
+      "summary": "请求模型选择下一动作"
+    },
+    {
+      "seq": 2,
+      "at": "2026-11-01T04:35:20.867253Z",
+      "kind": "llm_response",
+      "summary": "收到模型响应",
+      "model_request_id": "offline-fault-response-1"
+    },
+    {
+      "seq": 3,
+      "at": "2026-11-01T04:35:20.867253Z",
+      "kind": "tool_call",
+      "summary": "模型调用 search_materials",
+      "tool_call": {
+        "call_id": "offline-fault-search-01",
+        "tool": "search_materials",
+        "arguments": {
+          "query": "字幕",
+          "product_id": "demo-editor"
+        }
+      }
+    },
+    {
+      "seq": 4,
+      "at": "2026-11-01T04:35:20.867253Z",
+      "kind": "tool_result",
+      "summary": "search_materials: INTERNAL_ERROR",
+      "tool_result": {
+        "schema_version": "1.0",
+        "call_id": "offline-fault-search-01",
+        "tool": "search_materials",
+        "ok": false,
+        "data": null,
+        "error": {
+          "code": "INTERNAL_ERROR",
+          "message": "本地工具内部错误",
+          "retryable": false,
+          "field_errors": []
+        },
+        "elapsed_ms": 0
+      }
+    },
+    {
+      "seq": 5,
+      "at": "2026-11-01T04:35:20.867253Z",
+      "kind": "decision",
+      "summary": "工具执行失败 search_materials: INTERNAL_ERROR"
+    },
+    {
+      "seq": 6,
+      "at": "2026-11-01T04:35:20.867253Z",
+      "kind": "llm_request",
+      "summary": "请求模型选择下一动作"
+    },
+    {
+      "seq": 7,
+      "at": "2026-11-01T04:35:20.868771Z",
+      "kind": "llm_response",
+      "summary": "收到模型响应",
+      "model_request_id": "offline-fault-response-2"
+    },
+    {
+      "seq": 8,
+      "at": "2026-11-01T04:35:20.868771Z",
+      "kind": "decision",
+      "summary": "模型请求补充素材或输入"
+    },
+    {
+      "seq": 9,
+      "at": "2026-11-01T04:35:20.868771Z",
+      "kind": "finish",
+      "summary": "模型判断资料不足，需要补充"
+    }
+  ]
+}

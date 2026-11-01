@@ -1,0 +1,11 @@
+{
+  "schema_version": "1.0",
+  "request_id": "demo-request-01",
+  "topic": "用字幕整理旅行片段",
+  "audience": "想快速整理日常视频的创作者",
+  "platform": "抖音",
+  "target_duration_seconds": 15,
+  "style": "轻快、清楚、避免夸大",
+  "product_id": "demo-editor",
+  "language": "zh-CN"
+}
